@@ -1,0 +1,25 @@
+---
+applications:
+  - name: theta-broker
+    host: theta-broker
+    memory: 128M
+    services:
+      - xsuaa-broker
+      - broker-audit
+    health-check-type: http
+    health-check-http-endpoint: /health
+    env:
+      SBF_BROKER_CREDENTIALS_HASH: >
+        {
+          "broker-user": "sha256:7CsxG+FFghizWHI9FoAyA6dG7vM30GtTGmkgJrK5ftA=:kVTWKmiAmG7IhVy/1tGRLkJBiQulaXVbTuVSbN4XcGM="
+        }
+      SBF_SERVICE_CONFIG: >
+        {
+          "my-service": {
+            "extend_credentials": {
+              "shared": {
+                "uri": "https://my-service.example.com"
+              }
+            }
+          }
+        }

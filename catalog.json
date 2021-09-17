@@ -1,0 +1,17 @@
+{
+  "services": [
+    {
+      "name": "my-service",
+      "description": "A simple service",
+      "bindable": true,
+      "plans": [
+        {
+          "name": "my-plan",
+          "description": "The only plan",
+          "id": "25ff2a7a-d716-4bfa-b4b8-1e72b8711967"
+        }
+      ],
+      "id": "a3243abf-3e2a-4aff-87b7-0ea88ba46de2"
+    }
+  ]
+}
