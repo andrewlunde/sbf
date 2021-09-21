@@ -1,0 +1,13 @@
+{
+  "xsappname": "named-service-consumer-[c/d/i-user]",
+  "tenant-mode": "dedicated",
+  "identityzone": "[identityzone_id]",
+  "role-templates": [
+    {
+      "name": "Test",
+      "scope-references": [
+        "uaa.user"
+      ]
+    }
+  ]
+}

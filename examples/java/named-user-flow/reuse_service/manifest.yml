@@ -1,0 +1,44 @@
+---
+applications:
+
+- name: named-service
+  host: named-service-[c/d/i-user]
+  memory: 700M
+  path: service/target/named-service-1.0.0.war
+  buildpack: sap_java_buildpack
+  services:
+    - named-uaa
+  env:
+    TARGET_RUNTIME: tomee
+    UAA_SERVICE_NAME: named-uaa
+
+- name: named-service-broker
+  host: named-service-broker-[c/d/i-user]
+  memory: 128M
+  path: broker
+  services:
+    - named-uaa
+    - broker-audit
+  health-check-type: http
+  health-check-http-endpoint: /health
+  env:
+      SBF_CATALOG_SUFFIX: [c/d/i-user]
+      SBF_BROKER_CREDENTIALS_HASH: >
+        {
+          "[user]": "[hashed-password]"
+        }
+      SBF_SERVICE_CONFIG: >
+        {
+          "named-service": {
+            "extend_credentials": {
+              "shared": {
+                "vendor": "SAP"
+              },
+              "per_plan": {
+                "default": {
+                  "url": "https://named-service-[c/d/i-user].[cfdomain]"
+                }
+              }
+            }
+          }
+        }

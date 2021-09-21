@@ -1,0 +1,13 @@
+{
+  "services": [{
+    "name": "category_service",
+    "id": "367188a4-2511-4038-9be7-9694b0531112",
+    "description": "Demo category service",
+    "bindable": true,
+    "plans": [{
+      "id": "5fbe092f-7a44-4f69-ada8-181fead1bacbd",
+      "name": "default",
+      "description": "Demo category service plan"
+    }]
+  }]
+}

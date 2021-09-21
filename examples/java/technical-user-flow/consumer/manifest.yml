@@ -1,0 +1,13 @@
+---
+applications:
+
+- name: products-service-consumer
+  host: products-service-consumer-[c/d/i-user]
+  memory: 700M
+  path: target/products-service-consumer-1.0.0.war
+  buildpack: sap_java_buildpack
+  services:
+    - products-service-instance
+  env:
+    PRODUCTS_SERVICE_NAME: products-service-instance
+    TARGET_RUNTIME: tomee

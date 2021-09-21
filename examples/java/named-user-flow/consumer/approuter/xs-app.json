@@ -1,0 +1,10 @@
+{
+  "routes": [
+    {
+      "source": "^(/products)",
+      "target": "$1",
+      "destination": "consumer",
+      "authenticationType": "xsuaa"
+    }
+  ]
+}

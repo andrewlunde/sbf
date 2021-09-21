@@ -1,0 +1,42 @@
+---
+applications:
+
+- name: named-service
+  host: named-service-[c/d/i-user]
+  memory: 128M
+  path: service
+  services:
+    - named-uaa
+  env:
+    UAA_SERVICE_NAME: named-uaa
+
+- name: named-service-broker
+  host: named-service-broker-[c/d/i-user]
+  memory: 128M
+  path: broker
+  services:
+    - named-uaa
+    - broker-audit
+  health-check-type: http
+  health-check-http-endpoint: /health
+  env:
+      SBF_CATALOG_SUFFIX: [c/d/i-user]
+      SBF_BROKER_CREDENTIALS_HASH: >
+        {
+          "[user]": "[hashed-password]"
+        }
+      SBF_SERVICE_CONFIG: >
+        {
+          "named-service": {
+            "extend_credentials": {
+              "shared": {
+                "vendor": "SAP"
+              },
+              "per_plan": {
+                "default": {
+                  "url": "https://named-service-[c/d/i-user].[cfdomain]"
+                }
+              }
+            }
+          }
+        }

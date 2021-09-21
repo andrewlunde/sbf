@@ -1,0 +1,14 @@
+[
+    {
+        "id": 1,
+        "parentId": -1,
+        "title": "Sport",
+        "description": "Sport items"
+    },
+    {
+        "id": 2,
+        "parentId": 1,
+        "title": "Skiing",
+        "description": "Skiing items"
+    }
+]

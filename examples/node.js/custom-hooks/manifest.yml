@@ -1,0 +1,53 @@
+---
+applications:
+
+- name: category-service
+  host: category-service-[c/d/i-user]
+  memory: 128M
+  path: service
+  services:
+    - category-sbss
+  env:
+    SBSS_SERVICE_NAME: category-sbss
+
+- name: category-service-broker
+  host: category-service-broker-[c/d/i-user]
+  memory: 128M
+  path: broker
+  services:
+    - category-sbss
+    - broker-audit
+  health-check-type: http
+  health-check-http-endpoint: /health
+  env:
+      SBF_TENANT_ID: [tenant-id]
+      SBF_CREDENTIALS_PROVIDER_SERVICE: category-sbss
+      SBF_CATALOG_SUFFIX: [c/d/i-user]
+      SBF_BROKER_CREDENTIALS_HASH: >
+        {
+          "[user]": "[hashed-password]"
+        }
+      SBF_SERVICE_CONFIG: >
+        {
+          "category_service": {
+            "extend_credentials": {
+              "shared": {
+                "vendor": "SAP"
+              },
+              "per_plan": {
+                "default": {
+                  "url": "https://category-service-[c/d/i-user].[cfdomain]/categories"
+                }
+              }
+            }
+          }
+        }
+
+- name: category-service-consumer
+  host: category-service-consumer-[c/d/i-user]
+  memory: 128M
+  path: consumer
+  services:
+    - category-service-instance
+  env:
+    CATEGORY_SERVICE_NAME: category-service-instance

@@ -1,0 +1,28 @@
+---
+applications:
+
+- name: named-approuter
+  host: named-approuter-[c/d/i-user]
+  path: approuter
+  memory: 128M
+  services:
+    - named-uaa-default
+  env:
+    destinations: >
+      [
+        {
+          "name": "consumer",
+          "url": "https://named-service-consumer-[c/d/i-user].[cfdomain]",
+          "forwardAuthToken": true
+        }
+      ]
+
+- name: named-service-consumer
+  host: named-service-consumer-[c/d/i-user]
+  path: backend
+  memory: 128M
+  services:
+    - named-service-instance
+    - named-uaa-default
+  env:
+    PRODUCTS_SERVICE_NAME: named-service-instance

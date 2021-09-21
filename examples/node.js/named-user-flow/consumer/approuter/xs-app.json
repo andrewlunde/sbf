@@ -1,0 +1,9 @@
+{
+  "routes": [
+    {
+      "source": "^/consume",
+      "destination": "consumer",
+      "authenticationType": "xsuaa"
+    }
+  ]
+}

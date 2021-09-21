@@ -1,0 +1,31 @@
+---
+applications:
+
+- name: named-approuter
+  host: named-approuter-[c/d/i-user]
+  path: approuter
+  memory: 128M
+  services:
+    - named-uaa-default
+  env:
+    destinations: >
+      [
+        {
+          "name": "consumer",
+          "url": "https://named-service-consumer-[c/d/i-user].[cfdomain]",
+          "forwardAuthToken": true
+        }
+      ]
+
+- name: named-service-consumer
+  host: named-service-consumer-[c/d/i-user]
+  memory: 700M
+  path: backend/target/named-service-consumer-1.0.0.war
+  buildpack: sap_java_buildpack
+  services:
+    - named-service-instance
+    - named-uaa-default
+  env:
+    TARGET_RUNTIME: tomee
+    UAA_SERVICE_NAME: named-uaa
+    PRODUCTS_SERVICE_NAME: named-service-instance
