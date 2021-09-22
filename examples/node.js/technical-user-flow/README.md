@@ -31,6 +31,17 @@ cd ..
 
 ### Perform the steps in the [prerequisites section](/examples/prerequisites.md)
 
+### Genarate User/Passwords
+```
+npx hash-broker-password -b
+```
+```
+Plaintext password:
+Iez1v2zXvnFno12N7cAyhq0R30/9ypOS
+Hashed credentials:
+sha256:gB4ktfcp56Ml4hAj2I1W84kJpme08xfzcbZWWg1aFOw=:2PyXnJKShFG3U9zP5CPU7BQ+/y7BxJapAPX5ZiTE5as=
+```
+
 ### Substitute placeholders to avoid collisions
 
 In order to avoid collisions in naming, several placeholders in application files should be substituted with your own names. Open `reuse_service/manifest.yml` and substitute `[c/d/i-user]` with your user ID or other string that will not result in collisions with host names. Do the same for `reuse_service/xs-security.json`.
@@ -57,6 +68,9 @@ This command registers new service broker with space scope at the provided URL.
 
 ```sh
 cf create-service-broker products-demo-service-broker-[c/d/i-user] [user] [plain-text-password] https://products-service-broker-[c/d/i-user].[cfdomain] --space-scoped
+
+cf create-service-broker products-demo-service-broker-i830671 u830671 Iez1v2zXvnFno12N7cAyhq0R30/9ypOS https://products-service-broker-i830671.cfapps.eu10.hana.ondemand.com --space-scoped
+
 ```
 
 ## Consume the newly created Products service
@@ -98,6 +112,8 @@ Open `consumer/manifest.yml` and substitute `[c/d/i-user]` with your user ID or 
 
 ```sh
 cf create-service products-service-[c/d/i-user] default products-service-instance -c parameters.json
+
+cf create-service products-service-i830671 default products-service-instance -c parameters.json
 ```
 
 ### Deploy the consumer application

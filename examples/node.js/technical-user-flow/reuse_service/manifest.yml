@@ -2,14 +2,14 @@
 applications:
 
 - name: products-service
-  host: products-service-[c/d/i-user]
+  host: products-service-i830671
   memory: 128M
   path: service
   services:
     - products-uaa
 
 - name: products-service-broker
-  host: products-service-broker-[c/d/i-user]
+  host: products-service-broker-i830671
   memory: 128M
   path: broker
   services:
@@ -18,10 +18,10 @@ applications:
   health-check-type: http
   health-check-http-endpoint: /health
   env:
-      SBF_CATALOG_SUFFIX: [c/d/i-user]
+      SBF_CATALOG_SUFFIX: i830671
       SBF_BROKER_CREDENTIALS_HASH: >
         {
-          "[user]": "[hashed-password]"
+          "u830671": "sha256:gB4ktfcp56Ml4hAj2I1W84kJpme08xfzcbZWWg1aFOw=:2PyXnJKShFG3U9zP5CPU7BQ+/y7BxJapAPX5ZiTE5as="
         }
       SBF_SERVICE_CONFIG: >
         {
@@ -32,7 +32,7 @@ applications:
               },
               "per_plan": {
                 "default": {
-                  "url": "https://products-service-[c/d/i-user].[cfdomain]"
+                  "url": "https://products-service-i830671.cfapps.eu10.hana.ondemand.com"
                 }
               }
             }

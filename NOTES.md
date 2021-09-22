@@ -40,4 +40,20 @@ cf cs my-service-dev my-plan da-service
 cf create-service-key da-service da-key
 
 cf service-key da-service da-key
+
+# in another org/space from different global account?
+
+cf t -o A-Team_robot -s dev
+cf create-service-broker theta-robot broker-user 9JLsZmCbXvoDWT7OzjwQkQKpcCy2r3vX https://theta-broker.cfapps.eu10.hana.ondemand.com/robot --space-scoped
+
+cf service-brokers
+
+cf cs my-service-robot my-plan da-service
+cf create-service-key da-service da-key
+
+cf service-key da-service da-key
+
+
+cf delete-service-key da-service da-key
+cf delete-service da-service
 ```
